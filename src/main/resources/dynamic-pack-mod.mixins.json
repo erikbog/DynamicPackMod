@@ -1,0 +1,8 @@
+{
+  "required": true,
+  "package": "com.example.dynamicpack.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "server": [
+    "ServerResourcePackConfigurationTaskMixin"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "dynamic_pack_mod",
+  "version": "${version}",
+  "name": "Dynamic Pack Mod",
+  "description": "Fetches a resource-pack SHA-1 from an HTTP endpoint when a player joins.",
+  "authors": [
+    "erikbog"
+  ],
+  "contact": {
+    "sources": "https://github.com/erikbog/DynamicPackMod",
+    "issues": "https://github.com/erikbog/DynamicPackMod/issues"
+  },
+  "license": "MIT",
+  "environment": "server",
+  "entrypoints": {
+    "main": [
+      "com.example.dynamicpack.DynamicPackMod"
+    ]
+  },
+  "mixins": [
+    "dynamic-pack-mod.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.19.5",
+    "minecraft": "26.2",
+    "fabric-api": "*"
+  }
+}
