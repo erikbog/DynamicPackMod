@@ -5,7 +5,7 @@ Fabric server mod for Minecraft `26.2` that replaces the resource-pack SHA-1 sen
 ## Setup
 
 1. Install Fabric Loader `0.19.5` and Fabric API `0.160.0+26.2` on the server.
-2. Copy `build/libs/dynamic-pack-mod-1.0.0.jar` into the server's `mods` directory.
+2. Copy the built jar (`build/libs/dynamic-pack-mod-1.0.0+26.2.jar`) into the server's `mods` directory.
 3. Start the server once. Edit `config/dynamic-pack-mod.properties` and set:
 
 	```properties

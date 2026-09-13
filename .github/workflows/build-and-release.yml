@@ -24,6 +24,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Extract Versions from gradle.properties
+        id: versions
+        run: |
+          MC_VER=$(grep '^minecraft_version=' gradle.properties | cut -d'=' -f2 | tr -d '\r\n')
+          MOD_VER=$(grep '^mod_version=' gradle.properties | cut -d'=' -f2 | tr -d '\r\n')
+          echo "mc_version=$MC_VER" >> $GITHUB_OUTPUT
+          echo "mod_version=$MOD_VER" >> $GITHUB_OUTPUT
+
       - name: Set up JDK 25
         uses: actions/setup-java@v4
         with:
@@ -47,5 +55,21 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'release'
         uses: softprops/action-gh-release@v2
         with:
+          name: "Dynamic Pack Mod v${{ steps.versions.outputs.mod_version }} (Minecraft ${{ steps.versions.outputs.mc_version }})"
           files: build/libs/*.jar
           generate_release_notes: true
+
+      - name: Publish to Modrinth
+        if: (startsWith(github.ref, 'refs/tags/v') || github.event_name == 'release') && env.MODRINTH_TOKEN != ''
+        uses: Kir-Antipov/mc-publish@v3.3
+        env:
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+        with:
+          modrinth-id: 'dynamic-pack-mod'
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          files: 'build/libs/!(*-dev|*-sources).jar'
+          name: 'Dynamic Pack Mod v${{ steps.versions.outputs.mod_version }} for ${{ steps.versions.outputs.mc_version }}'
+          version: '${{ steps.versions.outputs.mod_version }}+${{ steps.versions.outputs.mc_version }}'
+          version-type: 'release'
+          game-versions: '${{ steps.versions.outputs.mc_version }}'
+          loaders: 'fabric'
