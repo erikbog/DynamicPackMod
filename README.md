@@ -1,11 +1,11 @@
 # Dynamic Pack Mod
 
-Fabric server mod for Minecraft `26.2` that replaces the resource-pack SHA-1 sent to each joining client with a value fetched from an HTTP endpoint.
+Fabric server mod for Minecraft `>=26.2` (tested on `26.3-rc-3`) that replaces the resource-pack SHA-1 sent to each joining client with a value fetched from an HTTP endpoint.
 
 ## Setup
 
-1. Install Fabric Loader `0.19.5` and Fabric API `0.160.0+26.2` on the server.
-2. Copy the built jar (`build/libs/dynamic-pack-mod-1.0.0+26.2.jar`) into the server's `mods` directory.
+1. Install Fabric Loader `0.19.5` on the server (no Fabric API required).
+2. Copy the built jar (`build/libs/dynamic-pack-mod-1.0.0+26.3-rc-3.jar`) into the server's `mods` directory.
 3. Start the server once. Edit `config/dynamic-pack-mod.properties` and set:
 
 	```properties
